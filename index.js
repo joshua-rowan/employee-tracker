@@ -8,36 +8,58 @@ const starterQuestion = [
     {
         type: 'list',
         message: 'What would you like to do?',
-        choices: ['viewAllEmployees', 'addEmployee', 'updateEmployeeRole', 'viewAllRoles', 'addRole', 'viewAllDepartments', 'addDepartment', 'deleteEmployee'],
+        choices: [
+            'View All Employees',
+            'Add Employee',
+            'Update Employee Role',
+            'View All Roles',
+            'Add Role',
+            'View All Departments',
+            'Add Department',
+            'Delete Employee',
+        ],
+        name: 'choice',
     },
 ];
 
+async function viewAllEmployees() {
+    try {
+        const employees = await Employee.findAll();
+        console.log('All Employees:');
+        employees.forEach((employee) => {
+            console.log(`ID: ${employee.id}, Name: ${employee.first_name} ${employee.last_name}`);
+        });
+    } catch (error) {
+        console.error('Error retrieving employees:', error);
+    }
+}
+
 async function init() {
     try {
-    const answer = await inquirer.prompt(questions);
+    const answer = await inquirer.prompt(starterQuestion);
     switch (answer.choice) {
-        case 'viewAllEmployees':
+        case 'View All Employees':
+            await viewAllEmployees();
+            break;
+        case 'Add Employee':
             //function
             break;
-        case 'addEmployee':
+        case 'Update Employee Role':
             //function
             break;
-        case 'updateEmployeeRole':
+        case 'View All Roles':
             //function
             break;
-        case 'viewAllRoles':
+        case 'Add Role':
             //function
             break;
-        case 'addRole':
+        case 'View All Departments':
             //function
             break;
-        case 'viewAllDepartments':
+        case 'Add Department':
             //function
             break;
-        case 'addDepartment':
-            //function
-            break;
-        case 'deleteEmployee':
+        case 'Delete Employee':
             //function
             break;
         default:
